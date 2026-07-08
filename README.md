@@ -26,7 +26,7 @@ The point of the build was to implement a full multi-tier ASP.NET Core solution 
 <!-- Replace these with real captures — a Swagger screenshot and one MVC page go a long way here. -->
 | Swagger (API) | Activity list (MVC) | Details + reviews |
 | ------------- | ------------------- | ----------------- |
-| ![Swagger](screenshots\swagger.png) | ![List](screenshots\activity-list.png) | ![Details](screenshots\activity-details.png) |
+| ![Swagger](screenshots/swagger.png) | ![List](screenshots/activity-list.png) | ![Details](screenshots/activity-details.png) |
 
 ## What This Project Demonstrates
 
