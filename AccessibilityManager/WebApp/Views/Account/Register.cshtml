@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="hr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register</title>
+   
+    <link rel="stylesheet" href="~/css/auth.css" />
+
+    @model WebApp.Models.RegisterVM
+
+</head>
+
+<body>
+
+    <div class="auth-wrapper">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h1>Create an account</h1>
+                <p>Join the community</p>
+            </div>
+    
+            <form asp-action="Register" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    
+                <div class="input-group">
+                    <label asp-for="FirstName"></label>
+                    <input asp-for="FirstName" placeholder="First name" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+    
+                <div class="input-group">
+                    <label asp-for="LastName"></label>
+                    <input asp-for="LastName" placeholder="Last name" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+    
+                <div class="input-group">
+                    <label asp-for="Username"></label>
+                    <input asp-for="Username" placeholder="Username" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+    
+                <div class="input-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" placeholder="Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+    
+                <div class="input-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" type="Password" placeholder="Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+    
+                <div class="input-group">
+                    <label asp-for="ConfirmPassword"></label>
+                    <input asp-for="ConfirmPassword" type="Password" placeholder="Confirm password" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+    
+                <button type="submit" class="btn-submit">Submit</button>
+            </form>
+    
+            <div class="auth-footer">
+                <p>Already have account? <a asp-action="Login">Login</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

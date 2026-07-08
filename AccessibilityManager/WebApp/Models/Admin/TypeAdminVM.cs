@@ -1,0 +1,8 @@
+﻿namespace WebApp.Models.Admin
+{
+    public class TypeAdminVM
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = null!;
+    }
+}

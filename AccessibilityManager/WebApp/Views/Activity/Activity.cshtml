@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Details</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/details.css" />
+
+    @using WebApp.Models.Activity;
+    
+    @model WebApp.Models.Activity.ActivityVM;
+
+    <script>
+        const activityId = @Model.Id;
+    </script>
+
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="details-grid">
+            <div class="main-column">
+
+                <div class="card">
+                    
+                    <div class="info-header">
+                        <h2>@Model.Name</h2>
+                        <span class="badge">@Model.Type.Name</span>
+                    </div>
+
+                    <div class="info-content">
+                        <p>@Model.Description</p>
+
+                        <ul class="contact-list">
+                            <li><i class="fas fa-map-marker-alt"></i> <span><strong>Address: </strong><br>@Model.Address</span></li>
+                            <li><i class="fas fa-phone"></i> <span><strong>Kontakt:</strong> @Model.Contact</span></li>
+                            <li><i class="fas fa-envelope"></i> <span><strong>Email:</strong> @Model.Email</span></li>
+                        </ul>
+                    </div>
+                    <div class="review-option">
+                        <h3 class="review-option-title">Leave review</h3>
+
+                        <form id="review-form" class="review-form">
+
+                            <input type="hidden" id="ratingValue" value="0" />
+
+                            <div class="rating-input">
+                                <label class="rating-label">Grade:</label>
+
+                                <div class="stars" id="starContainer">
+                                    <i id="star1" class="far fa-star" data-value="1"></i>
+                                    <i id="star2" class="far fa-star" data-value="2"></i>
+                                    <i id="star3" class="far fa-star" data-value="3"></i>
+                                    <i id="star4" class="far fa-star" data-value="4"></i>
+                                    <i id="star5" class="far fa-star" data-value="5"></i>
+                                </div>
+                            </div>
+
+                            <textarea id="comment"
+                                      rows="3"
+                                      class="review-textarea"
+                                      placeholder="Your comment..."></textarea>
+
+                            <button id="btn-submit" type="submit" class="btn btn-review">
+                                <i class="fas fa-paper-plane"></i> Submit
+                            </button>
+                        </form>
+                    </div>
+
+
+                </div>
+
+                <div class="card" style="margin-top: 24px;">
+                   
+                    <h2>User reviews</h2>
+
+                    <div id="no-reviews" class="no-content-container">
+                        @if (Model.Reviews.Count < 1)
+                        {
+                            <script>
+                                document.getElementById("no-reviews").style.display = "block";
+                            </script>
+
+                            <p>No reviews available</p>
+                        }
+                        else
+                        {
+                            <script>
+                                document.getElementById("no-reviews").style.display = "none";
+                            </script>
+                        }
+                    </div>
+
+                    @foreach(ReviewsVM review in Model.Reviews)
+                    {
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div>
+                                    <span class="reviewer-name">@review.Username</span>
+                                    <span class="review-date">@review.Date</span>
+                                </div>
+                                <div class="stars">
+                                    @for(int i = 1; i <= review.Grade; i++)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                </div>
+                            </div>
+                            @if(!string.IsNullOrEmpty(review.Comment))
+                            {
+                                <p class="review-text">@review.Comment</p>                                
+                            }
+                        </div>
+                    }                    
+
+                </div>
+            </div>
+
+            <div class="sidebar">
+
+                <div class="card">
+                    <h2>Accessibility Features</h2>
+                    <p class="subtitle">All available options</p>
+
+                    <div id="no-accessibilities" class="no-content-container">
+                        @if (Model.Accessibilities.Count < 1)
+                        {
+                            <script>
+                                document.getElementById("no-accessibilities").style.display = "block";
+                            </script>
+
+                            <p>No accessibilities available</p>
+                        }
+                        else
+                        {
+                            <script>
+                                document.getElementById("no-accessibilities").style.display = "none";
+                            </script>
+                        }
+                    </div>
+
+                    <ul class="checklist">
+                        @foreach (AccessibilitiesVM accessibilities in Model.Accessibilities)
+                        {
+                            <li><i class="far fa-check-circle"></i>@accessibilities.Name</li>
+                        }                        
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <script src="~/js/details.js"></script>
+    </footer>
+
+</body>
+</html>

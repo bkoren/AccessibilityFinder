@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="hr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile</title>
+    
+    <link rel="stylesheet" href="~/css/profile.css"/>
+
+    @model WebApp.Models.ProfileVM   
+
+</head>
+
+<body>
+    <div class="main-content">
+
+        <aside class="sidebar">
+            <div class="user-card">
+
+                <div class="user-img">
+                    <img src="~/img/default-avatar-icon.jpg" alt="Avatar">
+                </div>
+
+                <h3 class="user-name">@Model.Username</h3>
+                <p class="user-email">@Model.Email</p>
+                <span id="info">@Model.FirstName <span>@Model.LastName</span></span>
+                <span id="role">@Model.Role</span>
+                @if(Model.Role == "Admin")
+                {
+                    <script>
+                        document.getElementById("role").style = "background-color:red";
+                    </script>
+                }
+                else
+                {
+                    <script>
+                        document.getElementById("role").style = "background-color:green";
+                    </script>
+                }
+
+                <div class="user-details">
+
+                    <div class="detail-item">
+                        <span>Registration date:</span>
+                        <span class="detail-value">@Model.CreatedAt?.ToString("yyyy-MM-dd")</span>
+                    </div>
+
+                </div>
+            </div>
+        </aside>
+
+        <main class="change-password">
+            <div class="change-password-title">
+                <h1>Update profile</h1>                
+            </div>
+
+            <form class="edit-form">
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="first-name">First name</label>
+                        <input id="first-name" autocomplete="on" type="text">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="last-name">Last name</label>
+                        <input id="last-name" autocomplete="on" type="text">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="username">Username</label>
+                        <input id="username" autocomplete="on" type="text">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input id="email" autocomplete="on" type="email">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Current Password</label>
+                        <input id="password-current" type="password">
+                    </div>
+
+                    <div class="input-group">
+                        <label>New Password</label>
+                        <input id="password-new" type="password">
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button id="btn-submit" type="button">Submit</button>
+                </div>
+                <div id="resonse-info" style="display:none"></div>
+            </form>
+        </main>
+    </div>
+
+    <footer>
+        <script src="~/js/profile-profileUpdate.js"></script>
+        <script src="~/js/profile-passwordChange.js"></script>
+    </footer>
+
+</body>
+</html>

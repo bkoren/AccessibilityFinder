@@ -1,0 +1,41 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    padding: 40px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 2px solid;
+    padding: 10px;
+}
+
+.log-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-left button {
+    margin-right: 30px;
+}
+
+.header-right {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+}
+
+.header-right * {
+    padding: 10px 15px;
+}

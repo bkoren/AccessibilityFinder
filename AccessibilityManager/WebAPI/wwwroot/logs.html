@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="utf-8" />
+    <title>Zapisnik</title>
+
+    <link rel="stylesheet" href="/css/logs.css" />
+</head>
+<body>
+
+    <h1>Logger</h1>
+
+    <div class="log-header">
+        <div class="header-left">
+            <p>Enter number of log's</p>
+            <select id="logDisplayNum">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="all">all</option>
+            </select>
+
+            <button id="requestLogs">Display</button>
+
+            <p>Overall:</p>
+            <p id="logCount">0</p>
+        </div>
+
+        <div class="header-right">
+            <button id="changePasswordBtn">Change password</button>
+            <button id="logoutBtn">Sign out</button>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Level</th>
+                <th>Message</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody id="logsTable"></tbody>
+    </table>
+
+    <script src="/js/logs.js"></script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+﻿<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Dashboard</title>
+    
+    <link rel="stylesheet" href="~/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  
+    
+    @using WebApp.Models.Admin;
+    @using System.Security.Claims;
+
+    @model WebApp.Models.Admin.AdminVM;
+
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="card">
+            <div class="header-row">
+                <div>
+                    <h2>Activity management</h2>                    
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th>Views</th>
+                        <th style="text-align:right"></th>
+                    </tr>
+                </thead>
+                <tbody>
+   
+                    @foreach(ActivityAdminVM activity in Model.ActivityAdminVMs)
+                    {
+                        <tr>
+                            <td>@activity.Id</td>
+                            <td>@activity.Name</td>
+                            <td><span class="badge">@activity.Type</span></td>
+                            <td>@activity.Address</td>
+                            <td>@activity.Email</td>
+                            <td>@activity.Views</td>
+                            <td style="text-align:right">
+                                <button type="button" class="btn-icon btn-for-activity"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="btn-icon btn-for-activity-delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    }                          
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div id="activity-update" style="display: none" class="card"></div>
+
+        <div class="card">
+            <h2>Reviews</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Comment</th>
+                        <th>Grade</th>
+                        <th>Username</th>
+                        <th>Activity</th>
+                        <th style="text-align:right"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+     
+                    @foreach (ReviewAdminVM review in Model.ReviewAdminVMs)
+                    {
+                        <tr>
+                            <td>@review.Id</td>
+                            <td>@review.Comment</td>
+                            <td style="padding-left:35px">@review.Grade</td>
+                            <td>@review.Username</td>
+                            <td>@review.Activity</td>
+                            <td style="text-align:right">
+                                <button class="btn-icon btn-delete btn-for-review">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+             
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card" id="activity-section">
+            <h2>Add activity</h2>      
+            
+            <form asp-action="CreateActivity" method="post" class="grid-form">
+                <div class="form-group">
+                    <label asp-for="Activity.Name">Name <span>*</span></label>
+                    <input asp-for="Activity.Name" type="text">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Activity.Type">Type  <span>*</span></label>
+                    <select asp-for="Activity.Type" class="form-type">
+                        <option value="">Select Type</option>
+                        @foreach (var type in Model.TypeAdminVMs)
+                        {
+                            <option value="@type.Name">@type.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Activity.Description">Description <span>*</span></label>
+                    <textarea asp-for="Activity.Description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Activity.Accessibilities">Accessibilities</label>
+                    <select asp-for="Activity.Accessibilities">
+                        @foreach (var accessibility in Model.AccessibilityAdminVMs)
+                        {
+                            <option value="@accessibility.Name">@accessibility.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Activity.Address">Address <span>*</span></label>
+                    <input asp-for="Activity.Address" type="text">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Activity.Contact">Contact</label>
+                    <input asp-for="Activity.Contact" type="text">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Activity.Email">Email</label>
+                    <input asp-for="Activity.Email" type="email">
+                </div>
+                <div class="full-width" style="margin-top: 10px; display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Create activity</button>
+
+                    @if (TempData["ActivitySuccess"] != null)
+                    {
+                        <div class="text-success">@TempData["ActivitySuccess"]</div>
+                        TempData["ActivitySuccess"] = null;
+
+                    }
+                    else if (TempData["ActivityError"] != null)
+                    {
+                        <div class="text-danger">@TempData["ActivityError"]</div>
+                        TempData["ActivityError"] = null;
+
+                        <script>
+                            window.addEventListener("DOMContentLoaded", () => {
+                                document.getElementById("activity-section")?.scrollIntoView();
+                            });
+                        </script>
+                    }
+
+                </div>
+            </form>
+        </div>
+
+        <div class="two-column">
+            <div class="card" id="type-section">
+
+                <div class="header-row">                    
+                    <h2>Type</h2>                        
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th style="text-align:center">Name</th>
+                            <th style="text-align:right"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach(TypeAdminVM type in Model.TypeAdminVMs)
+                        {                         
+                            <tr>
+                                <td>@type.Id</td>
+                                <td style ="text-align:center">@type.Name</td>     
+                                <td style="text-align:right">                                             
+                                    <button class="btn-icon btn-delete btn-for-type">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>                            
+                        }
+                    </tbody>
+                </table>
+
+                <div class="form-group">
+
+                    <form asp-action="CreateType" method="post">
+                        <label>Add new type</label>
+
+                        <div class="input-card">
+                            <input asp-for="Type.Name" type="text" value="" style="flex:1">
+                            <button class="btn btn-primary btn-icon"><i class="fas fa-plus"></i> Submit</button>
+                        </div>                            
+
+                        @if (TempData["TypeSuccess"] != null)
+                        {
+                            <div id="typeSuccess" class="text-success">@TempData["TypeSuccess"]</div>
+                            TempData["TypeSuccess"] = null;
+                        }
+                        else if (TempData["TypeError"] != null)
+                        {
+                            <div id="typeError" class="text-danger">@TempData["TypeError"]</div>
+                            TempData["TypeError"] = null;
+                        }
+
+                        <div class="text-danger" style="display:none" id="jsErrorMsg"></div>
+
+                    </form>
+                </div>
+
+            </div>
+
+            
+
+            <div class="card" id="accessibility-section">
+
+                <div class="header-row">                    
+                    <h2>Accessibility</h2>                                                                
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th style="text-align:center">Name</th>
+                            <th style="text-align:right"></th>
+                        </tr>
+                    </thead>
+                
+                    <tbody>
+                        @foreach(AccessibilityAdminVM accessibility in Model.AccessibilityAdminVMs)
+                        {                        
+                            <tr>
+                                <td>@accessibility.Id</td>
+                                <td style="text-align:center">@accessibility.Name</td>
+                                <td style="text-align:right">     
+                                    <button class="btn-icon btn-delete btn-for-accessibility">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>                            
+                        }
+                    </tbody>
+
+                </table>
+        
+                <div class="form-group">
+
+                    <form asp-action="CreateAccessibility" method="post">
+                        <label>Add new accessibility</label>
+
+                        <div style="display: flex; gap: 10px;">
+                            <input asp-for="Accessibility.Name" type="text" value="" style="flex:1">
+                            <button class="btn btn-primary btn-icon">
+                                <i class="fas fa-plus"></i> Submit
+                            </button>
+                        </div>
+
+                        @if (TempData["AccessibilitySuccess"] != null)
+                        {
+                            <div class="text-success">@TempData["AccessibilitySuccess"]</div>
+                            TempData["AccessibilitySuccess"] = null;
+                        }
+                        else if (TempData["AccessibilityError"] != null)
+                        {                                
+                            <div class="text-danger">@TempData["AccessibilityError"]</div>
+                            TempData["AccessibilityError"] = null;
+                        }        
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Users</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Created at</th>
+                        <th style="text-align:right"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (UsersAdminVM user in Model.UsersAdminVMs)
+                    {
+                        <tr>
+                            <td>@user.Id</td>
+                            <td>@user.Username</td>
+                            <td>@user.FirstName</td>
+                            <td>@user.LastName</td>
+                            <td>@user.CreatedAt.ToString()</td>
+                            <td style="text-align:right">                                
+                                @if(user.Role != "Admin")
+                                {
+                                    <button class="btn-icon btn-delete btn-for-user">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Log</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Level</th>
+                        <th>Message</th>                        
+                        <th>Date</th>
+                        <th style="text-align:right"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach(LogsAdminVM log in Model.LogsAdminVMs)
+                    {
+                        <tr>
+                            <td>@log.Id</td>
+                            <td>@log.Level</td>
+                            <td>@log.Message</td>
+                            <td>@log.Timestamp</td>                           
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <footer>
+        <script src="~/js/admin.js"></script>
+    </footer>
+</body>
+</html>

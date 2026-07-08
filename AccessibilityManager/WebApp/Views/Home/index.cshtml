@@ -1,0 +1,100 @@
+﻿@using WebApp.Models.Filters
+
+<!DOCTYPE html>
+<html lang="hr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Home</title>
+
+    <link rel="stylesheet" href="~/css/index.css">    
+
+    @model WebApp.Models.Filters.FiltersVM;
+
+</head>
+<body>
+
+    <div class="main-content">
+
+        <aside class="sidebar">
+            <h2 class="sidebar-title">Filters</h2>
+
+            <div class="filter-activity">
+                <label for="type-dropdown" class="filter-label">Activity type</label>
+                <select id="type-dropdown" class="filter-dropdown">                                        
+                    <option value="0">All</option>
+                    @foreach(TypeVM type in Model.TypeVMs)
+                    {
+                        <option value="@type.Id">@type.Name</option>
+                    }                                              
+                </select>
+            </div>
+
+            <div class="filter-activity">
+                <label for="accessibility-checkBox" class="filter-label">Accessibility</label>
+
+                <div id="no-accessibilities" class="no-content-accessibilities">
+                    @if (Model.AccessibilitiesVMs.Count < 1)
+                    {
+                        <script>
+                            document.getElementById("no-accessibilities").style.display = "block";
+                        </script>
+
+                        <p>No accessibilities available</p>
+                    }
+                    else
+                    {
+                        <script>
+                            document.getElementById("no-accessibilities").style.display = "none";
+                        </script>
+                    }
+                </div>
+
+
+                <div id="accessibility-checkBox" class="filter-checkbox">
+                    @foreach(AccessibilitiesVM accessibility in Model.AccessibilitiesVMs)
+                    {
+                        <label class="checkbox-item" for="accessibility-@accessibility.Id">
+                            <input type="checkbox"
+                                    id="accessibility-@accessibility.Id"
+                                    value="@accessibility.Id"
+                                    name="accessibilities" />
+                            <span>@accessibility.Name</span>
+                        </label>
+                    }                             
+                </div>
+            </div>
+
+            <button id="apply-filters" class="btn-primary">Apply</button>
+        </aside>
+
+        <main class="activity-content">
+
+            <div class="search-container">
+                <input for="search" type="text" placeholder="Search by name..." id="search-value" class="search-input">
+                <button name="search" id="btn-search" class="btn-search">Search</button>
+            </div>
+
+            <div id="no-content" class="no-content-container"></div>
+
+            <div id="activity-cards" class="cards-grid">                               
+
+            </div>
+
+            <div class="pager">
+                <button id="prevPage" class="pager-btn" disabled>&larr;</button>
+                <span id="currentPage">1</span>
+                <button id="nextPage" class="pager-btn">&rarr;</button>
+            </div>
+
+        </main>
+    </div>
+
+    <footer>
+         <script src="~/js/index.js"></script> 
+    </footer>
+
+</body>
+</html>

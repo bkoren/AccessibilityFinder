@@ -1,0 +1,50 @@
+﻿
+<!DOCTYPE html>
+<html lang="hr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login</title>
+
+    <link rel="stylesheet" href="~/css/auth.css" />
+    
+    @model WebApp.Models.LoginVM
+
+</head>
+
+<body>
+
+    <div class="auth-wrapper">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h2>Welcome</h2>
+                <p>Login in your account</p>
+            </div>
+    
+            <form asp-action="Login" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    
+                <div class="input-group">
+                    <label asp-for="Username"></label>
+                    <input asp-for="Username" placeholder="Username" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+    
+                <div class="input-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" type="Password" placeholder="Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+    
+                <button type="submit" class="btn-submit">Submit</button>
+            </form>
+    
+            <div class="auth-footer">
+                <p>Don't have account? <a asp-action="Register">Sign in</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
