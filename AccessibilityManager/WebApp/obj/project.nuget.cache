@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "22qPihtP2YA=",
+  "dgSpecHash": "akAg8tYSADc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Bruno\\Projects\\Test\\AccessibilityFinder\\AccessibilityManager\\WebAPP\\WebApp.csproj",
+  "projectFilePath": "C:\\Users\\Bruno\\Projects\\collage\\razvoj-web-aplikacija\\Bruno-Koren-AccessibilityFinder\\AccessibilityManager\\WebApp\\WebApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Bruno\\.nuget\\packages\\automapper\\16.1.1\\automapper.16.1.1.nupkg.sha512",
     "C:\\Users\\Bruno\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
