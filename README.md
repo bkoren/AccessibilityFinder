@@ -76,11 +76,11 @@ dotnet run --project WebAPI
 dotnet run --project WebApp
 
 # 4. Open in browser
-- `https://localhost:7263/swagger` 
-- API & Swagger
+- https://localhost:7263/swagger
+- `API & Swagger`
 
-- `https://localhost:7208`
-- MVC
+- https://localhost:7208
+- `MVC web app`
 
 # Note: Both projects must run for application to work. HTTPS is required.
 
