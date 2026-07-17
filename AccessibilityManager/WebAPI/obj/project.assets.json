@@ -4717,11 +4717,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Bruno\\Projects\\collage\\razvoj-web-aplikacija\\Bruno-Koren-AccessibilityFinder\\AccessibilityManager\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Bruno\\Projects\\Test\\AccessibilityFinder\\AccessibilityManager\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "C:\\Users\\Bruno\\Projects\\collage\\razvoj-web-aplikacija\\Bruno-Koren-AccessibilityFinder\\AccessibilityManager\\WebAPI\\WebAPI.csproj",
+      "projectPath": "C:\\Users\\Bruno\\Projects\\Test\\AccessibilityFinder\\AccessibilityManager\\WebAPI\\WebAPI.csproj",
       "packagesPath": "C:\\Users\\Bruno\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Bruno\\Projects\\collage\\razvoj-web-aplikacija\\Bruno-Koren-AccessibilityFinder\\AccessibilityManager\\WebAPI\\obj\\",
+      "outputPath": "C:\\Users\\Bruno\\Projects\\Test\\AccessibilityFinder\\AccessibilityManager\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4743,8 +4743,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Bruno\\Projects\\collage\\razvoj-web-aplikacija\\Bruno-Koren-AccessibilityFinder\\AccessibilityManager\\Common\\Common.csproj": {
-              "projectPath": "C:\\Users\\Bruno\\Projects\\collage\\razvoj-web-aplikacija\\Bruno-Koren-AccessibilityFinder\\AccessibilityManager\\Common\\Common.csproj"
+            "C:\\Users\\Bruno\\Projects\\Test\\AccessibilityFinder\\AccessibilityManager\\Common\\Common.csproj": {
+              "projectPath": "C:\\Users\\Bruno\\Projects\\Test\\AccessibilityFinder\\AccessibilityManager\\Common\\Common.csproj"
             }
           }
         }

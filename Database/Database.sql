@@ -1,3 +1,9 @@
+CREATE DATABASE AccessibilityDB
+GO
+
+USE AccessibilityDB
+GO
+
 CREATE TABLE [Type] 
 (
     [ID] int PRIMARY KEY IDENTITY(1,1),

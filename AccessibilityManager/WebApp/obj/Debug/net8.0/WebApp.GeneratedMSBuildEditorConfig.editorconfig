@@ -19,61 +19,61 @@ build_property.TargetFrameworkIdentifier = .NETCoreApp
 build_property.TargetFrameworkVersion = v8.0
 build_property.RootNamespace = WebApp
 build_property.RootNamespace = WebApp
-build_property.ProjectDir = C:\Users\Bruno\Projects\collage\razvoj-web-aplikacija\Bruno-Koren-AccessibilityFinder\AccessibilityManager\WebApp\
+build_property.ProjectDir = C:\Users\Bruno\Projects\Test\AccessibilityFinder\AccessibilityManager\WebApp\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Bruno\Projects\collage\razvoj-web-aplikacija\Bruno-Koren-AccessibilityFinder\AccessibilityManager\WebApp
+build_property.MSBuildProjectDirectory = C:\Users\Bruno\Projects\Test\AccessibilityFinder\AccessibilityManager\WebApp
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/Bruno/Projects/collage/razvoj-web-aplikacija/Bruno-Koren-AccessibilityFinder/AccessibilityManager/WebApp/Views/Account/Login.cshtml]
+[C:/Users/Bruno/Projects/Test/AccessibilityFinder/AccessibilityManager/WebApp/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruno/Projects/collage/razvoj-web-aplikacija/Bruno-Koren-AccessibilityFinder/AccessibilityManager/WebApp/Views/Account/Register.cshtml]
+[C:/Users/Bruno/Projects/Test/AccessibilityFinder/AccessibilityManager/WebApp/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruno/Projects/collage/razvoj-web-aplikacija/Bruno-Koren-AccessibilityFinder/AccessibilityManager/WebApp/Views/Activity/Activity.cshtml]
+[C:/Users/Bruno/Projects/Test/AccessibilityFinder/AccessibilityManager/WebApp/Views/Activity/Activity.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0aXZpdHlcQWN0aXZpdHkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruno/Projects/collage/razvoj-web-aplikacija/Bruno-Koren-AccessibilityFinder/AccessibilityManager/WebApp/Views/Admin/Admin.cshtml]
+[C:/Users/Bruno/Projects/Test/AccessibilityFinder/AccessibilityManager/WebApp/Views/Admin/Admin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruno/Projects/collage/razvoj-web-aplikacija/Bruno-Koren-AccessibilityFinder/AccessibilityManager/WebApp/Views/Home/index.cshtml]
+[C:/Users/Bruno/Projects/Test/AccessibilityFinder/AccessibilityManager/WebApp/Views/Home/index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxpbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruno/Projects/collage/razvoj-web-aplikacija/Bruno-Koren-AccessibilityFinder/AccessibilityManager/WebApp/Views/Landing/Landing.cshtml]
+[C:/Users/Bruno/Projects/Test/AccessibilityFinder/AccessibilityManager/WebApp/Views/Landing/Landing.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGFuZGluZ1xMYW5kaW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruno/Projects/collage/razvoj-web-aplikacija/Bruno-Koren-AccessibilityFinder/AccessibilityManager/WebApp/Views/Profile/Profile.cshtml]
+[C:/Users/Bruno/Projects/Test/AccessibilityFinder/AccessibilityManager/WebApp/Views/Profile/Profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruno/Projects/collage/razvoj-web-aplikacija/Bruno-Koren-AccessibilityFinder/AccessibilityManager/WebApp/Views/Shared/Error.cshtml]
+[C:/Users/Bruno/Projects/Test/AccessibilityFinder/AccessibilityManager/WebApp/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruno/Projects/collage/razvoj-web-aplikacija/Bruno-Koren-AccessibilityFinder/AccessibilityManager/WebApp/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Bruno/Projects/Test/AccessibilityFinder/AccessibilityManager/WebApp/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruno/Projects/collage/razvoj-web-aplikacija/Bruno-Koren-AccessibilityFinder/AccessibilityManager/WebApp/Views/_ViewImports.cshtml]
+[C:/Users/Bruno/Projects/Test/AccessibilityFinder/AccessibilityManager/WebApp/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruno/Projects/collage/razvoj-web-aplikacija/Bruno-Koren-AccessibilityFinder/AccessibilityManager/WebApp/Views/_ViewStart.cshtml]
+[C:/Users/Bruno/Projects/Test/AccessibilityFinder/AccessibilityManager/WebApp/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bruno/Projects/collage/razvoj-web-aplikacija/Bruno-Koren-AccessibilityFinder/AccessibilityManager/WebApp/Views/Shared/_Layout.cshtml]
+[C:/Users/Bruno/Projects/Test/AccessibilityFinder/AccessibilityManager/WebApp/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-7882z672yd

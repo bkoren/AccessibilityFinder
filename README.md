@@ -9,7 +9,7 @@
 
 </div>
 
-> **Academic project.** Built as the capstone for the *Razvoj web aplikacija* (Web Application Development) course at Algebra University. Not deployed — clone and run locally (see [Getting Started](#getting-started)).
+> **Academic project.** Built as the capstone for the Web Application Development course at Algebra University. Not deployed — clone and run locally (see [Getting Started](#getting-started)).
 
 ---
 
@@ -52,39 +52,65 @@ AccessibleFinder/
     └── ...                       # shared business + data-access layers (multi-tier)
 ```
 
-## Getting Started
-
-### Prerequisites
-
-```bash
-.NET SDK 8.0
-SQL Server 2019+ (or SQL Server Express / LocalDB)
-Visual Studio 2022 (or the dotnet CLI)
-```
+## Getting Started`
 
 ### Installation
 
+## Prerequisites
+
+- .NET SDK 8.0
+- SQL Server 2019+ (or SQL Server Express / LocalDB)
+- Visual Studio 2022 (or the dotnet CLI)
+
+## Setup
+
+**1. Clone the repository**
+
 ```bash
-# 1. Clone the repo
-git clone https://github.com/{{USER}}/{{REPO}}.git
-
-# 2. Navigate to the solution file
-cd {{REPO}}
-
-# 3. Run the two projects from the solution
-dotnet run --project WebAPI
-dotnet run --project WebApp
-
-# 4. Open in browser
-- https://localhost:7263/swagger
-- `API & Swagger`
-
-- https://localhost:7208
-- `MVC web app`
-
-# Note: Both projects must run for application to work. HTTPS is required.
-
+git clone https://github.com/bkoren/AccessibilityFinder.git
+cd AccessibilityFinder
 ```
+
+**2. Create the database**
+
+```bash
+sqlcmd -S localhost -E -b -i "Database/database.sql"
+```
+
+If your instance is named, replace `localhost` with `.\SQLEXPRESS`.
+
+**3. Trust the local HTTPS certificate** (first time only)
+
+```bash
+dotnet dev-certs https --trust
+```
+
+**4. Run both projects**
+
+Each command blocks its terminal, so **open two terminal windows**.
+
+Terminal 1 — API:
+
+```bash
+cd AccessibilityManager
+dotnet run --project WebAPI
+```
+
+Terminal 2 — web app:
+
+```bash
+cd AccessibilityManager
+dotnet run --project WebApp
+```
+
+## Access
+
+| App           | URL                            |
+|---------------|--------------------------------|
+| API & Swagger | https://localhost:7263/swagger |
+| MVC web app   | https://localhost:7208         |
+
+> **Note:** both projects must be running. The web app calls the API — if only one is up, pages will load but data will not.
 
 ## License
 
