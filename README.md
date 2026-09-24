@@ -17,7 +17,7 @@
 
 Demonstration of application that helps people with disabilities find activities — accommodation, restaurants, landmarks, and more — that fit their access needs. Administrators catalog activities by type and tag each one with concrete accessibility features (transport options, specialized guides, and so on); users add reviews and accessibility ratings. Accessibility is treated as a first-class, searchable dimension rather than an afterthought.
 
-The point of the build was to implement a full multi-tier ASP.NET Core solution end to end: a JWT-secured REST API and an MVC web app sharing a business layer over a SQL Server database.
+Built as a second-year project for the course Web Application Development at Algebra University, Zagreb.
 
 ## Screenshots
 
