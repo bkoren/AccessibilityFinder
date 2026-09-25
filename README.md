@@ -9,13 +9,9 @@
 
 </div>
 
-> **Academic project.** Built as the capstone for the Web Application Development course at Algebra University. Not deployed — clone and run locally (see [Getting Started](#getting-started)).
-
----
-
 ## About
 
-Demonstration of application that helps people with disabilities find activities — accommodation, restaurants, landmarks, and more — that fit their access needs. Administrators catalog activities by type and tag each one with concrete accessibility features (transport options, specialized guides, and so on); users add reviews and accessibility ratings. Accessibility is treated as a first-class, searchable dimension rather than an afterthought.
+Demonstration of application that helps people with disabilities find activities — accommodation, restaurants, landmarks, and more — that fit their access needs. Administrators catalog activities by type and tag each one with concrete accessibility features (transport options, specialized guides, and so on); users add reviews and accessibility ratings.
 
 Built as a second-year project for the course Web Application Development at Algebra University, Zagreb.
 
