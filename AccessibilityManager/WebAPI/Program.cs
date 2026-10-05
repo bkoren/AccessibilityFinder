@@ -89,11 +89,9 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddDbContext<AccessibilityDbContext>(options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
 
 var app = builder.Build();
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
