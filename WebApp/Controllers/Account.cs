@@ -10,9 +10,16 @@ namespace WebApp.Controllers
     public class Account : Controller
     {
         private readonly HttpClient _client;
-        public Account(IHttpClientFactory httpClientFactory)
+        private readonly IConfiguration _configuration;
+
+        private readonly string _baseUrl;
+        public Account(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _client = httpClientFactory.CreateClient();
+            _configuration = configuration;
+
+            _baseUrl = _configuration.GetValue<string>("ApiBaseUrl")!;
+            _baseUrl = _configuration["ApiBaseUrl"]!;
         }
 
         public IActionResult Login()
@@ -43,7 +50,7 @@ namespace WebApp.Controllers
                 return View(model);
 
             var response = await _client.PostAsync(
-                "https://localhost:7263/Account/Login",
+                _baseUrl + "Account/Login",
 
                 new StringContent(
                     JsonSerializer.Serialize(model),
@@ -95,7 +102,7 @@ namespace WebApp.Controllers
                 return View(model);
 
             var response = await _client.PostAsync(
-                "https://localhost:7263/Account/Register",
+                _baseUrl + "Account/Register",
 
                 new StringContent(
                     JsonSerializer.Serialize(model),

@@ -9,16 +9,6 @@ using WebAPI.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowLocalhost7208", policy => policy    
-        .WithOrigins("https://localhost:7208")
-        .AllowAnyMethod()
-        .AllowAnyHeader()
-        .AllowCredentials()
-    ); 
-});
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -86,6 +76,8 @@ builder.Services.AddSwaggerGen(options =>
     );
 });
 
+
+
 builder.Services.AddDbContext<AccessibilityDbContext>(options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
 
 var app = builder.Build();
@@ -93,9 +85,10 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
-
-app.UseCors("AllowLocalhost7208");
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseStaticFiles();
 
@@ -104,3 +97,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.Run();
+
+public partial class Program { }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Text;
 using WebApp.Models;
+using Microsoft.Extensions.Configuration;
 using WebApp.Models.Filters;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -14,14 +15,17 @@ namespace WebApp.Controllers
 {
     public class Home : Controller
     {
-        private readonly string BaseUrl = @"https://localhost:7263/";
-
+        private readonly string _baseUrl;
+        private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
         private readonly HttpClient _client;
-        public Home(IHttpClientFactory httpClientFactory, IMapper mapper)
+        public Home(IHttpClientFactory httpClientFactory, IMapper mapper, IConfiguration configuration)
         {
             _mapper = mapper;
             _client = httpClientFactory.CreateClient();
+            _configuration = configuration;
+
+            _baseUrl = _configuration["ApiBaseUrl"]!;
         }
 
         [Authorize]
@@ -30,9 +34,9 @@ namespace WebApp.Controllers
             if (User.Identity?.IsAuthenticated == false)
                 return RedirectToAction("Login", "Account");
 
-            var getTypes = await _client.GetAsync($"{BaseUrl}type/all");
+            var getTypes = await _client.GetAsync($"{_baseUrl}type/all");
             
-            var getAccessibilities = await _client.GetAsync($"{BaseUrl}accessibility/all");
+            var getAccessibilities = await _client.GetAsync($"{_baseUrl}accessibility/all");
 
             List<TypeVM> typeVMs = new();
             List<AccessibilitiesVM> accessibilitiesVMs = new();

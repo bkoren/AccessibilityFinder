@@ -22,15 +22,20 @@ namespace WebApp.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly string BaseUrl = @"https://localhost:7263/";
+        private readonly string _baseUrl;
 
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
         private readonly HttpClient _client;
 
-        public AdminController(IHttpClientFactory httpClient, IMapper mapper)
+        public AdminController(IHttpClientFactory httpClient, IMapper mapper, IConfiguration configuration)
         {
             _mapper = mapper;
             _client = httpClient.CreateClient();
+            _configuration = configuration;
+
+            _baseUrl = _configuration["ApiBaseUrl"]!;
+
         }
 
         [HttpPost]
@@ -47,7 +52,7 @@ namespace WebApp.Controllers
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
             var response = await _client.PostAsJsonAsync(
-                $"{BaseUrl}type/add", model.Type
+                $"{_baseUrl}type/add", model.Type
             );
 
             var url = Url.Action("Admin", adminVM) + "#type-section";
@@ -99,7 +104,7 @@ namespace WebApp.Controllers
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
             var response = await _client.PostAsJsonAsync(
-                $"{BaseUrl}accessibility/add", model.Accessibility
+                $"{_baseUrl}accessibility/add", model.Accessibility
             );
 
             var url = Url.Action("Admin", adminVM) + "#accessibility-section";
@@ -151,7 +156,7 @@ namespace WebApp.Controllers
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
             var response = await _client.PostAsJsonAsync(
-                $"{BaseUrl}activity/add", model.Activity                
+                $"{_baseUrl}activity/add", model.Activity                
             );
 
             var url = Url.Action("Admin", adminVM) + "#activity-section";
@@ -203,7 +208,7 @@ namespace WebApp.Controllers
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
             var response = await _client.PostAsJsonAsync(
-                $"{BaseUrl}activity/update{model.Update.Id}", model.Update
+                $"{_baseUrl}activity/update{model.Update.Id}", model.Update
             );
 
             var url = Url.Action("Admin", adminVM);
@@ -271,7 +276,7 @@ namespace WebApp.Controllers
 
             AdminVM adminVM = new AdminVM();
 
-            var getAllActivities = await _client.GetAsync($"{BaseUrl}activity/all");
+            var getAllActivities = await _client.GetAsync($"{_baseUrl}activity/all");
             if (getAllActivities.IsSuccessStatusCode)
             {
                 if (getAllActivities.StatusCode != HttpStatusCode.NoContent && getAllActivities.StatusCode != HttpStatusCode.NotFound)
@@ -282,7 +287,7 @@ namespace WebApp.Controllers
                 }
             }
 
-            var getAllReviews = await _client.GetAsync($"{BaseUrl}review/all");
+            var getAllReviews = await _client.GetAsync($"{_baseUrl}review/all");
             if (getAllReviews.IsSuccessStatusCode)
             {
                 if (getAllReviews.StatusCode != HttpStatusCode.NoContent && getAllReviews.StatusCode != HttpStatusCode.NotFound)
@@ -293,7 +298,7 @@ namespace WebApp.Controllers
                 }
             }
 
-            var getAllUsers = await _client.GetAsync($"{BaseUrl}user/all");
+            var getAllUsers = await _client.GetAsync($"{_baseUrl}user/all");
             if (getAllUsers.IsSuccessStatusCode)
             {
                 if (getAllUsers.StatusCode != HttpStatusCode.NoContent && getAllUsers.StatusCode != HttpStatusCode.NotFound)
@@ -305,7 +310,7 @@ namespace WebApp.Controllers
 
             }
 
-            var getAllLogs = await _client.GetAsync($"{BaseUrl}log/all");
+            var getAllLogs = await _client.GetAsync($"{_baseUrl}log/all");
             if (getAllLogs.IsSuccessStatusCode)
             {
                 if (getAllLogs.StatusCode != HttpStatusCode.NoContent && getAllLogs.StatusCode != HttpStatusCode.NotFound)
@@ -316,7 +321,7 @@ namespace WebApp.Controllers
                 }
             }
 
-            var getAllTypes = await _client.GetAsync($"{BaseUrl}type/all");
+            var getAllTypes = await _client.GetAsync($"{_baseUrl}type/all");
             if (getAllTypes.IsSuccessStatusCode)
             {
                 if (getAllTypes.StatusCode != HttpStatusCode.NoContent && getAllTypes.StatusCode != HttpStatusCode.NotFound)
@@ -327,7 +332,7 @@ namespace WebApp.Controllers
                 }
             }
 
-            var getAllaccessibilites = await _client.GetAsync($"{BaseUrl}accessibility/all");
+            var getAllaccessibilites = await _client.GetAsync($"{_baseUrl}accessibility/all");
             if (getAllaccessibilites.IsSuccessStatusCode)
             {
                 if (getAllaccessibilites.StatusCode != HttpStatusCode.NoContent && getAllaccessibilites.StatusCode != HttpStatusCode.NotFound)

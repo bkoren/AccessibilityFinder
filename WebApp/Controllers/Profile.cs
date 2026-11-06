@@ -12,14 +12,18 @@ using WebApp.Models;
 
 public class ProfileController : Controller
 {
-    private readonly string BaseUrl = "https://localhost:7263/";
+    private readonly string BaseUrl;
 
     private readonly HttpClient _client;
+    private readonly IConfiguration _configuration;
     private readonly IMapper _mapper;
-    public ProfileController(IHttpClientFactory httpClientFactory, IMapper mapper)
+    public ProfileController(IHttpClientFactory httpClientFactory, IMapper mapper, IConfiguration configuration)
     {
         _mapper = mapper;
         _client = httpClientFactory.CreateClient();
+        _configuration = configuration;
+
+        BaseUrl = _configuration["ApiBaseUrl"]!;
     }
 
     [Authorize]

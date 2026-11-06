@@ -9,15 +9,19 @@ namespace WebApp.Controllers
 {
     public class ActivityController : Controller
     {
-        private readonly string BaseUrl = @"https://localhost:7263/activity/";
+        private readonly string _baseUrl;
 
         private readonly IMapper _mapper;
         private readonly HttpClient _client;
+        private readonly IConfiguration _configuration;
 
-        public ActivityController(IMapper mapper, IHttpClientFactory httpClient)
+        public ActivityController(IMapper mapper, IHttpClientFactory httpClient, IConfiguration configuration)
         {
             _mapper = mapper;
             _client = httpClient.CreateClient();
+            _configuration = configuration;
+
+            _baseUrl = _configuration["ApiBaseUrl"]!;
         }
 
         public async Task<ActionResult<ActivityVM>> Activity(int id)
@@ -27,7 +31,7 @@ namespace WebApp.Controllers
 
             try
             {
-                var response = await _client.GetAsync($"{BaseUrl}get/{id}");
+                var response = await _client.GetAsync($"{_baseUrl}get/{id}");
 
                 if (response.IsSuccessStatusCode)
                 {
