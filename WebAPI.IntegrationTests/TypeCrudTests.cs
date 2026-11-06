@@ -9,16 +9,13 @@ using Xunit.Abstractions;
 namespace WebAPI.IntegrationTests
 {
     public class TypeCrudTests : IClassFixture<CustomWebApplicationFactory>
-    {
-        private readonly HttpClient _client;
+    {       
         private readonly ITestOutputHelper _testOutput;
         private readonly CustomWebApplicationFactory _factory;
 
         public TypeCrudTests(CustomWebApplicationFactory factory, ITestOutputHelper testOutput)
-        {
-            _client = factory.CreateClient();         
-            _factory = factory;
-            
+        {            
+            _factory = factory;           
             _testOutput = testOutput;
         }
 
@@ -31,67 +28,62 @@ namespace WebAPI.IntegrationTests
             };
 
             HttpClient adminClient = _factory.CreateAdminClient();
-
-
             HttpResponseMessage response = await adminClient.PostAsJsonAsync("type/add", input);
 
-            _testOutput.WriteLine(await response.Content.ReadAsStringAsync());
-
-            Assert.True(response.StatusCode == HttpStatusCode.OK,
-                $"\u001b[FAILED]\u001b Expected: {HttpStatusCode.OK}, Actual: {response.StatusCode}");                 
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }    
 
         [Fact]
         public async Task Add_Duplicate_Type_Returns_BadRequest()
         {
-            var input = new TypeCreateDTO
+            TypeCreateDTO input = new TypeCreateDTO
             {
                 Name = "TestType",
             };
 
-            await _client.PostAsJsonAsync("type/add", input);
+            HttpClient adminClient = _factory.CreateAdminClient();
+            HttpResponseMessage response = await adminClient.PostAsJsonAsync("type/add", input);
 
-            HttpResponseMessage response = await _client.PostAsJsonAsync("type/add", input);
+            _testOutput.WriteLine(await response.Content.ReadAsStringAsync());
 
-            var expectedStatus = HttpStatusCode.BadRequest;
-            Assert.Equal(expectedStatus, response.StatusCode);
-
-            string body = await response.Content.ReadAsStringAsync();
-            var expectedMessage = "Type already exists!";
-            Assert.Contains(expectedMessage, body);
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);          
+            Assert.Contains("Type already exists", await response.Content.ReadAsStringAsync());
         }
 
         [Fact]
         public async Task Get_All_Types_Returns_Expected()
         {
-            HttpResponseMessage response = await _client.GetAsync("type/all");
+            HttpClient userClient = _factory.CreateClient();
+            HttpResponseMessage response = await userClient.GetAsync("type/all");
           
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-
-
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                var types = await response.Content.ReadFromJsonAsync<List<TypeReadDTO>>();
-                Assert.NotNull(types);               
-
-                var expectedName = "TestType";
-                Assert.Contains(types, t => t.Name == expectedName);
+                List<TypeReadDTO>? types = await response.Content.ReadFromJsonAsync<List<TypeReadDTO>>();
+                
+                Assert.NotNull(types);                              
+                Assert.Contains(types, t => t.Name == "TestType");
             }
         }
 
         [Fact]
         public async Task Delete_Type_Returns_Expected()
         {
-            string testToken = _factory.GetTestJwtToken("TestAdmin", 1, "Admin", 60);
+            TypeCreateDTO input = new TypeCreateDTO
+            {
+                Name = "TestTypeToDelete",
+            };
 
-            var idToDelete = 0;
+            HttpClient adminClient = _factory.CreateAdminClient();
+            HttpResponseMessage newType = await adminClient.PostAsJsonAsync("type/add", input);
 
-            _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", testToken);
-            HttpResponseMessage response = await _client.DeleteAsync($"type/delete/{idToDelete}");
+            Assert.Equal(HttpStatusCode.OK, newType.StatusCode);
 
-            var expectedStatus = HttpStatusCode.OK;
-            Assert.Equal(expectedStatus, response.StatusCode);
+            int newTypeId = await newType.Content.ReadFromJsonAsync<int>();
+            HttpResponseMessage response = await adminClient.DeleteAsync($"type/delete/{newTypeId}");
+            
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }      
     }
 }
