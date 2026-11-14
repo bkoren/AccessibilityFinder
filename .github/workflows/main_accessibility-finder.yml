@@ -26,6 +26,9 @@ jobs:
       - name: Build with dotnet
         run: dotnet build WebAPI/WebAPI.csproj --configuration Release
 
+      - name: Test it
+        run: dotnet test
+
       - name: dotnet publish
         run: dotnet publish WebAPI/WebAPI.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp"
 
@@ -34,6 +37,8 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
+      
+
 
   deploy:
     runs-on: windows-latest
@@ -52,4 +57,23 @@ jobs:
           app-name: 'accessibility-finder'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_748DC903FC1B45B793F1EAEAA7C0650B }}
+          publish-profile: ${{ secrets.AZURE_API_PUBLISH_PROFILE }}
+  
+  
+  deploy-webapp:
+    runs-on: windows-latest
+    needs: build
+
+    steps:
+      - name: Download WebApp artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: webapp
+
+      - name: Deploy WebApp artifact
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: accessibility-finder-web      
+          slot-name: 'Production'
+          package: .
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
