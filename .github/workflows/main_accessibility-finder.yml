@@ -37,8 +37,15 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
-      
-
+          
+      - name: dotnet publish WebApp
+        run: dotnet publish WebApp/WebApp.csproj -c Release -o "${{env.DOTNET_ROOT}}/mywebapp"
+    
+      - name: Upload WebApp artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: webapp
+          path: ${{env.DOTNET_ROOT}}/mywebapp
 
   deploy:
     runs-on: windows-latest
