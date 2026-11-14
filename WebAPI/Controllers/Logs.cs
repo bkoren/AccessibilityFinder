@@ -1,7 +1,6 @@
 ﻿using Common.DTOs;
 using Common.DTOs.Log;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Context;
@@ -20,14 +19,14 @@ namespace WebAPI.Controllers
             _context = context;
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet("count")]
         public ActionResult Count()
         {
             return Ok(_context.Logs.Count());        
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet("all")]
         public async Task<ActionResult<List<LogReadDTO>>> All()
         {
@@ -40,7 +39,7 @@ namespace WebAPI.Controllers
                 : NoContent();
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet("get/{count}")]
         public async Task<ActionResult<List<LogReadDTO>>> GetLast(int count)
         {
