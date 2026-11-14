@@ -119,7 +119,7 @@ namespace WebAPI.Controllers
             }                       
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("delete/{id}")]
         public async Task<ActionResult> Delete(int id)
         {

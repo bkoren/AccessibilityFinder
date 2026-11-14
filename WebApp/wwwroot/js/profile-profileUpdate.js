@@ -20,7 +20,7 @@
     };
 
     try {
-        const profileUpdateRequest = await fetch('https://localhost:7263/user/update', {
+        const profileUpdateRequest = await fetch('https://accessibility-finder-h0fdfjhta7ckgjbx.italynorth-01.azurewebsites.net/user/update', {
             method: 'PUT',
             credentials: 'include',
             headers: {

@@ -17,7 +17,7 @@
     };
 
     try {
-        const passwordChangeRequest = await fetch('https://localhost:7263/account/change-password', {
+        const passwordChangeRequest = await fetch('https://accessibility-finder-h0fdfjhta7ckgjbx.italynorth-01.azurewebsites.net/account/change-password', {
             method: 'POST',
             credentials: 'include',
             headers: {

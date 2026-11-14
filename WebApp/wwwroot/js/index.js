@@ -54,7 +54,7 @@ async function loadPage(page)
         params.append("accessibilityId", id);
     });
 
-    const requestActivities = await fetch(`https://localhost:7263/activity/search?${params.toString()}`);
+    const requestActivities = await fetch(`https://accessibility-finder-h0fdfjhta7ckgjbx.italynorth-01.azurewebsites.net/activity/search?${params.toString()}`);
     const data = await requestActivities.json();  
   
     createActivities(data);
@@ -108,7 +108,7 @@ function createActivities(activities)
 
 async function updatePager(numOfItems)
 {
-    const fetchValue = await fetch("https://localhost:7263/activity/count");
+    const fetchValue = await fetch("https://accessibility-finder-h0fdfjhta7ckgjbx.italynorth-01.azurewebsites.net/activity/count");
     const textValue = await fetchValue.text();
 
     totalItems = Number(textValue);       

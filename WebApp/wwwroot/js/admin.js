@@ -51,7 +51,7 @@
         `;
 
         async function getNames(url, elementId) {
-            const response = await fetch("https://localhost:7263/" + url);
+            const response = await fetch("https://accessibility-finder-h0fdfjhta7ckgjbx.italynorth-01.azurewebsites.net/" + url);
             const data = await response.json();
 
             const names = data.map(item => item.name);                      
@@ -95,7 +95,7 @@
             };
 
             try {
-                const response = await fetch(`https://localhost:7263/activity/update/${activityId}`, {
+                const response = await fetch(`https://accessibility-finder-h0fdfjhta7ckgjbx.italynorth-01.azurewebsites.net/activity/update/${activityId}`, {
                     method: 'PUT',
                     credentials: 'include',
                     headers: {
@@ -139,7 +139,7 @@
 
         try {
             const response = await fetch(
-                `https://localhost:7263/activity/delete/${activityId}`,
+                `https://accessibility-finder-h0fdfjhta7ckgjbx.italynorth-01.azurewebsites.net/activity/delete/${activityId}`,
                 {
                     method: "DELETE",
                     credentials: "include"
@@ -169,7 +169,7 @@
         try
         {
             const response = await fetch(
-                `https://localhost:7263/review/delete/${reviewId}`,
+                `https://accessibility-finder-h0fdfjhta7ckgjbx.italynorth-01.azurewebsites.net/review/delete/${reviewId}`,
                 {
                     method: "DELETE",
                     credentials: "include"
@@ -200,7 +200,7 @@
         try
         {
             const response = await fetch(
-                `https://localhost:7263/type/delete/${typeId}`,
+                `https://accessibility-finder-h0fdfjhta7ckgjbx.italynorth-01.azurewebsites.net/type/delete/${typeId}`,
                 {
                     method: "DELETE",
                     credentials: "include"
@@ -250,7 +250,7 @@
 
         try {
             const response = await fetch(
-                `https://localhost:7263/user/delete/${userId}`,
+                `https://accessibility-finder-h0fdfjhta7ckgjbx.italynorth-01.azurewebsites.net/user/delete/${userId}`,
                 {
                     method: "DELETE",
                     credentials: "include"
@@ -278,7 +278,7 @@
 
         try {
             const response = await fetch(
-                `https://localhost:7263/accessibility/delete/${accessibilityId}`,
+                `https://accessibility-finder-h0fdfjhta7ckgjbx.italynorth-01.azurewebsites.net/accessibility/delete/${accessibilityId}`,
                 {
                     method: "DELETE",
                     credentials: "include"
