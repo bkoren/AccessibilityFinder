@@ -2,113 +2,140 @@
 
 # AccessibilityFinder
 
+**Find activities, restaurants and accommodation that are accessible to people with disabilities.**
+
+[![Build and deploy](https://github.com/bkoren/AccessibilityFinder/actions/workflows/main_accessibility-finder.yml/badge.svg)](https://github.com/bkoren/AccessibilityFinder/actions/workflows/main_accessibility-finder.yml)
 ![.NET](https://img.shields.io/badge/.NET-8.0-512BD4)
-![C#](https://img.shields.io/badge/C%23-11-239120)
-![SQL Server](https://img.shields.io/badge/SQL%20Server-2019%2B-CC2927)
-![License](https://img.shields.io/badge/license-MIT-blue)
+![C#](https://img.shields.io/badge/C%23-12-239120)
+![SQL Server](https://img.shields.io/badge/Azure%20SQL-SQL%20Server-CC2927)
+![Azure](https://img.shields.io/badge/hosted%20on-Azure%20App%20Service-0078D4)
+
+### [🌐 Live demo](https://accessibility-finder-web-ctejd5c0duh5b7cu.italynorth-01.azurewebsites.net) · [📘 API (Swagger)](https://accessibility-finder-h0fdfjhta7ckgjbx.italynorth-01.azurewebsites.net/swagger)
 
 </div>
 
+> [!NOTE]
+> **This is a demo project.** It was built to demonstrate full-stack .NET development skills, and it is also used as a target for security testing. The data is fictional, and the [Vulnerability Report](#vulnerability-report) below lists known weaknesses on purpose. Do not use it for real accessibility information.
+
+> The apps run on Azure's free tier, which sleeps when idle. The first visit can take 30–60 seconds to wake up.
+
 ## About
 
-Demonstration of application that helps people with disabilities find activities — accommodation, restaurants, landmarks, and more — that fit their access needs. Administrators catalog activities by type and tag each one with concrete accessibility features (transport options, specialized guides, and so on); users add reviews and accessibility ratings.
+A web application that helps people with disabilities find places that fit their access needs. Administrators catalog activities by type and tag each one with concrete accessibility features (step-free access, transport options, specialized guides, and so on). Registered users search and filter activities and leave reviews with ratings.
 
-Built as a second-year project for the course Web Application Development at Algebra University, Zagreb.
+Started as a second-year project for the course *Web Application Development* at Algebra University, Zagreb, then extended with cloud deployment, CI/CD, integration tests, and a security review.
 
-## Screenshots
+## Features
 
-| Swagger (API) | Activity list (MVC) | Details + reviews |
-| ------------- | ------------------- | ----------------- |
-| ![Swagger](screenshots/swagger.png) | ![List](screenshots/activity-list.png) | ![Details](screenshots/activity-details.png) |
+**Users**
+- Register, log in, update profile, change password
+- Search activities by name, filter by type and accessibility features, with server-side paging
+- View activity details and add reviews with a 1–5 star rating
+
+**Administrators**
+- Create, update and delete activities, types and accessibility features
+- Manage users and moderate reviews
+- View the action log of the whole system
 
 ## What This Project Demonstrates
 
-- **RESTful API design** — CRUD, dedicated search endpoint, and server-side paging for the primary entity, with meaningful HTTP status codes (400 / 404 / 500) and error handling.
-- **Authentication & authorization** — JWT issuing and validation (`register` / `login` / `change password`), role-based access separating admin and user capabilities.
-- **Request logging** — every CRUD action is logged with structured entries, exposed through dedicated log endpoints and consumed by static, token-authenticated pages (JWT held in `localStorage`).
-- **Relational data modelling** — a 1-to-N relationship (activity type) and an M-to-N relationship (accessibility features, via a bridge table), plus a user-action bridge for reviews/ratings.
-- **Server-side validation** — required fields, format checks (URLs, emails), and duplicate-name prevention via model annotations.
-- **Multi-tier architecture** — separate model sets per tier with AutoMapper handling the mapping, so database models never leak into views.
-- **Database-first with SQL Server** — schema and seed data live in a single SQL script; connection strings are read from configuration, never hardcoded.
+- **REST API** with CRUD, search and server-side paging, and meaningful HTTP status codes.
+- **JWT authentication** with salted password hashing and role-based authorization (`Admin` / `User`).
+- **Multi-tier design:** WebAPI owns the database, WebApp calls it over HTTP through a proxy controller, and shared DTOs live in `Common`. AutoMapper maps between tiers.
+- **Integration tests** that boot the real API in memory (see [Tests](#-tests)).
+- **CI/CD** with GitHub Actions: build, test and deploy both apps to Azure on every push.
+- **Secrets management:** no secrets in the repo (User Secrets locally, environment variables on Azure).
 
 ## Tech Stack
 
-.NET 8 · ASP.NET Core (Web API + MVC) · C# · SQL Server (database-first) · JWT · Swagger / OpenAPI · AutoMapper · Razor + Bootstrap · vanilla JS / AJAX
+**Backend:** .NET 8 · ASP.NET Core Web API · Entity Framework Core · JWT Bearer · AutoMapper · Swagger / OpenAPI
+**Frontend:** ASP.NET Core MVC · Razor · Bootstrap · vanilla JavaScript (fetch)
+**Data:** SQL Server / Azure SQL (database-first)
+**Testing:** xUnit · Microsoft.AspNetCore.Mvc.Testing · EF Core InMemory
+**DevOps:** GitHub Actions · Azure App Service
 
-## Project Structure
+## 🧪 Tests
 
+**13 integration tests** · xUnit · `WebApplicationFactory` · EF Core InMemory
+
+Each test starts the real WebAPI in memory, replaces SQL Server with an in-memory database, and sends real HTTP requests.
+
+| Area | What is tested |
+|:--|:--|
+| 🔐 **Auth** | Login, registration, and role access (401 / 403 / 200) |
+| 📍 **Activities** | Adding and listing activities |
+| 🏷️ **Types** | Adding and listing types |
+| ♿ **Accessibility** | Adding and listing accessibility features |
+| ⭐ **Reviews** | Adding a review and reading it back |
+
+```bash
+dotnet test
 ```
-AccessibleFinder/
-├── Database/
-│   └── Database.sql              # database-first schema + seed data (single script)
-└── AccessibleManager/
-    ├── AccessibleManager.sln
-    ├── WebAPI/                   # RESTful service — JWT-secured, Swagger UI
-    ├── WebApp/                   # MVC web application
-    └── ...                       # shared business + data-access layers (multi-tier)
-```
 
-## Getting Started`
+> [!TIP]
+> The tests also run in the CI pipeline. If any test fails, the deploy stops.
 
-### Installation
+## Vulnerability Report
 
-## Prerequisites
+Found a security issue? Reports are welcome. This project is also used for security testing practice, so every finding helps.
+
+Please report it privately through the repository’s Security tab → Report a vulnerability. Include the endpoint or page, the steps to reproduce, and what an attacker could do.
+
+## Running Locally
+
+### Prerequisites
 
 - .NET SDK 8.0
 - SQL Server 2019+ (or SQL Server Express / LocalDB)
-- Visual Studio 2022 (or the dotnet CLI)
+- Visual Studio 2022 or the `dotnet` CLI
 
-## Setup
-
-**1. Clone the repository**
+### 1. Clone
 
 ```bash
 git clone https://github.com/bkoren/AccessibilityFinder.git
 cd AccessibilityFinder
 ```
 
-**2. Create the database**
+### 2. Create the database
 
 ```bash
 sqlcmd -S localhost -E -b -i "Database/database.sql"
 ```
 
-If your instance is named, replace `localhost` with `.\SQLEXPRESS`.
+For a named instance, replace `localhost` with `.\SQLEXPRESS`.
 
-**3. Trust the local HTTPS certificate** (first time only)
+### 3. Set the secrets
 
-```bash
-dotnet dev-certs https --trust
-```
-
-**4. Run both projects**
-
-Each command blocks its terminal, so **open two terminal windows**.
-
-Terminal 1 — API:
+Both apps need the **same** JWT key (at least 32 bytes). Use User Secrets so nothing secret is committed:
 
 ```bash
-cd AccessibilityManager
-dotnet run --project WebAPI
+dotnet user-secrets set "Jwt:SecureKey" "<your-long-random-key>" --project WebAPI
+dotnet user-secrets set "Jwt:SecureKey" "<your-long-random-key>" --project WebApp
 ```
 
-Terminal 2 — web app:
+The local connection string (`WebAPI/appsettings.Development.json`) and the API address (`WebApp/appsettings.Development.json` → `ApiBaseUrl`) are already set for a default local SQL Server.
+
+### 4. Run both apps
+
+Each command blocks its terminal, so open two terminals.
 
 ```bash
-cd AccessibilityManager
-dotnet run --project WebApp
+dotnet dev-certs https --trust     # first time only
+dotnet run --project WebAPI        # terminal 1
+dotnet run --project WebApp        # terminal 2
 ```
-
-## Access
 
 | App           | URL                            |
 |---------------|--------------------------------|
 | API & Swagger | https://localhost:7263/swagger |
-| MVC web app   | https://localhost:7208         |
+| Web app       | https://localhost:7208         |
 
-> **Note:** both projects must be running. The web app calls the API — if only one is up, pages will load but data will not.
+## Deployment
 
-## License
+Pushing to `main` triggers `.github/workflows/main_accessibility-finder.yml`, which:
 
-Distributed under the MIT License. See `LICENSE` for details.
+1. Builds the solution and runs the integration tests.
+2. Publishes WebAPI and WebApp.
+3. Deploys each app to its own Azure App Service.
 
+Configuration on Azure comes from App Service environment variables: `Jwt__SecureKey` (both apps), `ConnectionStrings__DefaultConnection` (WebAPI) and `ApiBaseUrl` (WebApp).
