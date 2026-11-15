@@ -53,7 +53,7 @@ document.getElementById("btn-submit").addEventListener("click", async function (
 
     try
     {
-        const response = await fetch('https://accessibility-finder-h0fdfjhta7ckgjbx.italynorth-01.azurewebsites.net/review/add', {
+        const response = await fetch('/proxy/review/add', {
             method: 'POST',
             credentials: 'include',
             headers: {

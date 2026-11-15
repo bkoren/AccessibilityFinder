@@ -20,7 +20,7 @@
     };
 
     try {
-        const profileUpdateRequest = await fetch('https://accessibility-finder-h0fdfjhta7ckgjbx.italynorth-01.azurewebsites.net/user/update', {
+        const profileUpdateRequest = await fetch('/proxy/user/update', {
             method: 'PUT',
             credentials: 'include',
             headers: {

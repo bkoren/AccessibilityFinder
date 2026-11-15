@@ -22,7 +22,7 @@ namespace WebAPI.IntegrationTests
         }
 
         [Fact]
-        public async Task Add_Type_Returns_Ok()
+        public async Task TestAddType()
         {
             TypeCreateDTO input = new TypeCreateDTO
             {
@@ -37,7 +37,7 @@ namespace WebAPI.IntegrationTests
 
 
         [Fact]
-        public async Task Get_All_Types_Returns_Expected()
+        public async Task TestGetAllTypes()
         {
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", adminToken);
             HttpResponseMessage response = await _client.GetAsync("type/all");
