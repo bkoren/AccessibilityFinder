@@ -26,7 +26,7 @@ namespace WebApp.Controllers
 
             var request = new HttpRequestMessage(new HttpMethod(Request.Method), apiUrl);
 
-            if (request.Content != null)
+            if (Request.ContentLength > 0)
             {
                 request.Content = new StreamContent(Request.Body);
                 request.Content.Headers.ContentType =

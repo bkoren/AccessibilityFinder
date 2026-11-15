@@ -13,12 +13,14 @@ namespace WebAPI.IntegrationTests
         private HttpClient _client;
 
         private string adminToken;
+        private string userToken;
 
         public TestActivity(CustomWebApplicationFactory testFactory)
         {
             _client = testFactory.CreateClient();
 
             adminToken = CustomWebApplicationFactory.CreateTestToken("admin", 1, "Admin");
+            userToken = CustomWebApplicationFactory.CreateTestToken("user", 2);
         }
 
         [Fact]
@@ -38,6 +40,17 @@ namespace WebAPI.IntegrationTests
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", adminToken);
 
             HttpResponseMessage response = await _client.PostAsJsonAsync("activity/add", input);
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+
+        [Fact]
+        public async Task TestGetActivity()
+        {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", userToken);
+
+            HttpResponseMessage response = await _client.GetAsync("activity/all");
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
