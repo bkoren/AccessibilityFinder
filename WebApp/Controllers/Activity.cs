@@ -31,7 +31,13 @@ namespace WebApp.Controllers
 
             try
             {
-                var response = await _client.GetAsync($"{_baseUrl}get/{id}");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"{_baseUrl}activity/get/{id}");
+
+                string? token = Request.Cookies["JwtToken"];
+                request.Headers.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                var response = await _client.SendAsync(request);
 
                 if (response.IsSuccessStatusCode)
                 {
