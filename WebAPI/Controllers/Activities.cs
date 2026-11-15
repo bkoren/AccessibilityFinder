@@ -29,7 +29,7 @@ namespace WebAPI.Controllers
             return Ok(_context.Activities.Count());
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize]
         [HttpGet("all")]
         public async Task<ActionResult<List<ActivityGetDTO>>> All()
         {
@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
                 : NoContent();
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize]
         [HttpGet("get/{id}")]
         public async Task<ActionResult<ActivityGetDTO>> Get(int id)
         {
@@ -229,7 +229,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize]
         [HttpGet("search")]
         public async Task<ActionResult<List<ActivitySearchDTO>>> Search(string? name = null, int page = 1, int typeId = 0, [FromQuery] List<int>? accessibilityId = null)
         {
